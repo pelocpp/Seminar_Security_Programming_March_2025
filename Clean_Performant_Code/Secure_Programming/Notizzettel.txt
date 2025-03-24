@@ -1,0 +1,177 @@
+// =========================================
+
+Seminar Sicherheitsprogrammierung in C / C++
+
+Peter Loos
+
+C/C++, Java, C#,  Mobile Programming (Java),
+Kotlin, 
+
+Technik Akademie Erlangen  
+
+// Informatik
+// Automatisierung
+
+Python
+
+Back-to-the-Roots: C/C++
+
+Guten Morgen
+
+Vormittags & Nachmittags
+
+12.30 - 13.30
+
+// =========================================
+
+Cache Line
+
+Sanitizer
+
+===========================================
+
+2 Tools:
+
+a) Github
+
+https://github.com/pelocpp
+
+https://github.com/pelocpp/cpp_clean_performant_secure_code
+
+b) Visual Studio
+
+// =========================================
+
+Was soll denn drin sein ???
+
+Was sind meine Erwartungen ????
+
+// =========================================
+
+Maschinencode
+
+Zuverlässigkeit
+
+C / C++
+
+"Pointer auf Vektor Element"
+
+Pointer:  Non-Owning Zeiger
+
+// =========================================
+
+C ist in C++ echt enthalten !!! Zu 99%.
+
+C++: Verwende ich alles von C in C++: Nein.
+
+Beispiel: Parameterübergabe:  C++: Via Referenz
+                                   Not: Via Pointer
+
+NICHT: Ist der Pointer obsolet in C++: new / delete
+
+C++: Templates.  Sind ein Stellvertreter für einen realen Datentyp.
+
+NICHTS dynamisches dabei .
+
+C# / Java:
+
+2 Phasen-Übersetzung:
+
+1. Phase: C# => Zwischencode.
+
+Virtualle Maschine: SW : Die führt den Zwischencode aus.
+
+                        Zusätzlichen Funktionalität: Speicherverwaltung 
+
+                        new, new, new // kein delete: Garbage Collector
+
+2. Phase: Zwischencode => Maschinecode.
+
+// ========================================
+
+new versus not new:
+
+Wo liegen Objekte:
+
+new ===> HEAP !!!!!!!!
+
+no new ===>  STACK !!!!!!!!
+no new ===>  GLOBALES DATENSEGMENT !!!!!!!! Destruktor wird nach Verlassen von main aufgerufen.
+
+       Es können in den Instanzvariablen Daten auf dem Heap angelegt werden.
+
+       Nicht negativ: Auch der Stack hat seine Grenzen.
+
+       No Heap: Embedded Programming: Jepp, das gibt es.
+
+       räumt sich selber auf !!!  Schließende }: Destruktor
+
+Was ist nicht so positiv an new:  a) delete b) Performanz.
+
+==============================================================
+
+C ist eine High-Level Language:
+
+Jepp, durchaus, wenn man mit Assembler vergleicht.
+
+==============================================================
+
+Undefined Behaviour (UB)
+
+C++:
+
+int* ip = new int;                delete ip;          Scalar-new // Scalar - delete
+
+int* ip = new int[10];            delete[] ip;        Array-new // Array - delete
+
+Wenn ich im zweiten Fall "delete ip" verwenden würde: NICHT DEFINIERT.
+
+                                  Undefined Behaviour // UB
+
+Undefined Behaviour gibt es in C++ an sehr vielen Stellen.
+
+// =================================================================
+
+AX:   16 Bit Welt
+
+EAX:  32 Bit Welt   // e = extended
+
+
+
+xor         eax,eax    Da wird einfach 0 in den Akku geschrieben
+
+
+EAX
+EBX
+EXC
+EDX
+
+
+Für den Stack gibt es 2 Register:
+
+SP
+
+BP   Base Pointer
+
+======================================================
+
+++i oder i++   :-)))
+
+Steht ++i oder i++ isoliert da, gibt es keinen Unterschied.
+
+int n = ++i;
+
+int n = i++;
+
+===========================================================
+
+Speicher, der NiCHT vorbelegt ist:
+
+Ist dennoch vorbelegt: 
+
+Debug-Modus:
+
+Stack: CC
+Heap:  CD
+
+Heap:  DD, nach der Freigabe mit einem ungültigen Zeiger

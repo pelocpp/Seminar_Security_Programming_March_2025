@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureProgrammingMoreIssues.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureProgrammingIssues.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureProgrammingAdvices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureProgrammingTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme_Secure_Programming_Issues.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Secure_Programming_Advices.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_security_advice_no_new.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_security_advice_no_new_gc.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Secure_Programming.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Literature.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Secure_Tools.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Secure_Programming_in_C_Lef_Ioannidis.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Secure_Programming_MoreIssues.md">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CppCheck_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CppCheck_Extension_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CppCheck_Extension_02.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CppCheck_Extension_03.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CppCheck_Extension_04.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="VisualStudio_AddressSanitizer_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="VisualStudio_AddressSanitizer_02.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="WarningLevel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="SEI_CERT_C_Coding_Standard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="SEI_CERT_Cpp_Coding_Standard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="cpp_core_guidelines.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Misra_C.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Misra_Cpp.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Buch_Barr_Embedded_C_Coding_Standard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Buch_LeBlanc_Writing_Secure_Code.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ClangTidy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Notizzettel.txt" />
+  </ItemGroup>
+</Project>

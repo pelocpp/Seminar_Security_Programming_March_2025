@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="STL_Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\LoggerUtility\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Caches.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hashing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParallelArrays.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STL_Algorithms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme_Data_Structures_and_Algorithms.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_l1_l2_l3_cache.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_array.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_vector.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_deque.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_forward_list.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_list.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_tree.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_hash_table.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_queue.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_stack.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_container_overview.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Caches.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_Big_O_Notation.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_ParallelArrays.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_STL_Container.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Readme_STL_Algorithms.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_algorithms_unexpected_exceptions_01.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp_stl_algorithms_unexpected_exceptions_02.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="L1_L2_L3_Cache.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="cpp_stl_big_o_notation.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
