@@ -399,7 +399,7 @@ namespace SecureProgrammingExploitability {
 
             // ....
 
-            delete[] buffer; // second free
+            //delete[] buffer; // second free
         }
     }
 
@@ -413,9 +413,9 @@ namespace SecureProgrammingExploitability {
             struct A {};
             struct B {};
 
-            struct A* a = (struct A*) malloc(sizeof(struct A));
+            struct A* a = (struct A*)malloc(sizeof(struct A));
 
-            // cast to unrelated type
+            // C-Style cast to unrelated type: No - Go
             struct B* b = (struct B*) a;
         }
 
@@ -427,7 +427,11 @@ namespace SecureProgrammingExploitability {
 
             uint32_t* u32 = (uint32_t*) &data;
 
-            *u32 = 0x12345678; // de-referencing invokes undefined behavior
+       //     *u32 = 0x12345678; // de-referencing invokes undefined behavior
+
+            printf("%hx\n", data);
+            printf("%hx\n", *u16);
+            printf("%x\n", *u32);
         }
 
         static void test_incorrect_type_conversion() {
@@ -445,14 +449,16 @@ namespace SecureProgrammingExploitability {
 
         static void test_use_of_external_format_string_internal(const char* format, const char* str) {
 
-            printf(format, str);
+            // Überprüfung bzgl. Parameter format
+
+            printf(format, str);   // Uhhhhhhhhhhhhhhhhhhhhhhhh
         }
 
         static void test_use_of_external_format_string() {
 
-        //    test_use_of_external_format_string_internal("%s", "Very, very long string");
+            test_use_of_external_format_string_internal("%s", "Very, very long string");
 
-            test_use_of_external_format_string_internal("%s %d", "Very, very long string");
+        //    test_use_of_external_format_string_internal("%s %d", "Very, very long string");
         }
     }
 }

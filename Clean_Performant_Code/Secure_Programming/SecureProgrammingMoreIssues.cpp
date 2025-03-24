@@ -13,9 +13,77 @@
 #include <thread>
 #include <vector>
 
+namespace MemoryLeaks {
+
+    static void test_memory_leaks()
+    {
+        int* ptr = new int[10]; // memory allocated but never deallocated
+    }
+
+    static void test_static_third_example()
+    {
+        static int value = 123;
+
+        static int value2[1000] = { 1,2 ,3};
+
+        value++;
+    }
+}
+
 namespace SecureProgrammingMoreIssues {
 
     namespace UsingPointers {
+
+        struct Numbers
+        {
+            int m_numbers[1000];
+        };
+
+        static void func(int* ptr) {
+            ptr[0] = 123;
+        }
+
+        // Call by Value
+        static void func2(struct Numbers numbers) {
+
+            size_t s = sizeof(numbers);
+            s = sizeof(struct Numbers);
+            numbers.m_numbers[0] = 123;
+        }
+
+        // call-by-value oder call-by-address
+        // Von Fall zu Fall zu überlegen:
+        // call-by-value: Schützt das Original
+        // call-by-address: PERFORMANZ!!! m ggf. mit const kombinieren
+        static void func3(/*const*/ struct Numbers* pNumbers) {
+
+            size_t s = sizeof(pNumbers);
+            s = sizeof(struct Numbers);
+            (*pNumbers).m_numbers[0] = 123;
+            // oder etwas geschmeidiger
+            pNumbers->m_numbers[0] = 123;
+        }
+
+        // Haben wir es bei call-by-reference mit Kopie oder Adresse zu tun:
+        // Es ist hinter den Kulissen eine Adresse
+        static void func4(/*const*/ struct Numbers& pNumbers) {
+
+            size_t s = sizeof(pNumbers);
+            s = sizeof(struct Numbers);
+            pNumbers.m_numbers[0] = 123;
+        }
+
+        void testCallingConventions()
+        {
+            int numbers[1000] = {};
+            func(numbers);
+
+            struct Numbers num = {};
+            func2(num);
+
+            func3(&num);
+        }
+
 
         static void decay(const int* ages) {
             // Size of the pointer = 8
@@ -25,9 +93,27 @@ namespace SecureProgrammingMoreIssues {
             // std::cout << std::size(ages) << '\n';
         }
 
+
+
+        static void decay2(const int* ages) {
+            // Size of the pointer = 8
+            std::println("Size of an 'int*' pointer:          {}", sizeof(ages));
+
+            // Compile Error
+            // std::cout << std::size(ages) << '\n';
+        }
+
+        static void decay2(const int* ages, int len) {
+            // Size of the pointer = 8
+            std::println("Size of an 'int*' pointer:          {}", sizeof(ages));
+
+            // Compile Error
+            // std::cout << std::size(ages) << '\n';
+        }
+
         static void test_using_pointers_demstrating_decay() {
 
-            int ages[] = { 15, 30, 50 };
+            int ages[3] = { 15, 30, 50 };
             // Number of elements = 3
             std::println("Number of array elements:           {}", std::size(ages));
 
@@ -36,7 +122,8 @@ namespace SecureProgrammingMoreIssues {
 
             // Size of array = 12 (= 3 * 4)
             std::println("Number of bytes used by this array: {}", sizeof(ages));
-            decay(ages);
+           // decay(ages);
+            decay2(ages, sizeof(ages) / sizeof(ages[0]));
         }
 
         static void test_using_pointers_std_size() {
@@ -60,7 +147,35 @@ namespace SecureProgrammingMoreIssues {
 
     namespace DanglingReferences {
 
-        struct Data {
+        struct MyStruct{
+            int n;
+        };
+
+        static void test_function() {
+
+            int n = 123;
+
+            int& rn = n;
+
+            int* ip = NULL;
+
+            // Heap oder kein Heap
+
+            struct MyStruct* sp = new MyStruct();
+
+            sp->n = 123;
+
+            struct MyStruct& name = *sp;
+
+            name.n = 123;
+
+            delete sp;
+
+            int x = name.n;
+        }
+
+        struct Data
+        {
             Data(int& value) : m_value(value) {}
             int& m_value;
         };
@@ -114,19 +229,14 @@ namespace SecureProgrammingMoreIssues {
         }
     }
 
-    namespace MemoryLeaks {
 
-        static void test_memory_leaks()
-        {
-            int* ptr = new int[10]; // memory allocated but never deallocated
-        }
-    }
 
     namespace RaceConditions {
 
-        const int MaxCount = 100'000;
+        const int MaxCount = 1'000;
 
-        long counter{};
+        long counter = 0;
+
         std::atomic<long> atomicCounter{};
 
         static void increment() {
@@ -135,6 +245,8 @@ namespace SecureProgrammingMoreIssues {
                 ++counter;
             }
         }
+
+
 
         static void incrementAtomic() {
 
@@ -172,7 +284,7 @@ namespace SecureProgrammingMoreIssues {
         static void test_race_conditions()
         {
             test_race_conditions_unsafe();
-            test_race_conditions_safe();
+        //    test_race_conditions_safe();
         }
     }
 }
@@ -183,10 +295,13 @@ void secure_programming_more_issues()
 {
     using namespace SecureProgrammingMoreIssues;
 
-    UsingPointers::test_using_pointers();
-    DanglingReferences::test_dangling_reference();
-    MemsetIssue::test_disappearing_memset();
-    MemoryLeaks::test_memory_leaks();
+    //UsingPointers::testCallingConventions();
+    //DanglingReferences::test_function();
+
+    //UsingPointers::test_using_pointers();
+    //DanglingReferences::test_dangling_reference();
+    //MemsetIssue::test_disappearing_memset();
+    //MemoryLeaks::test_memory_leaks();
     RaceConditions::test_race_conditions();
 }
 

@@ -28,6 +28,21 @@ Cache Line
 
 Sanitizer
 
+Type - Conversion
+
+WEITERARBEIT:
+
+STL:  Container, Algorithmen
+
+MT / Parallele Algorithmen.
+
+"no-naked for-loop"
+
+Performanz
+
+Assembler // Eleganz
+
+
 ===========================================
 
 2 Tools:
@@ -175,3 +190,107 @@ Stack: CC
 Heap:  CD
 
 Heap:  DD, nach der Freigabe mit einem ungültigen Zeiger
+
+==============================================================
+
+Typ - Konversion:
+
+a) C-Style Cast
+
+b) C++ - Style Casting: Named Casting // static_cast, const_cast , ...
+
+=================================================================
+
+Wandbox:
+
+Compiler Explorer // God Bolt // Assembler-lastig
+
+https://wandbox.org/
+
+Online-Compiler
+
+=======================================================================
+
+Array Decay:  to decay ==> verkümmern  // Verlust
+
+Java, C#: Ein Array in Java, C#, JavaScript hat eine Länge.
+
+C/C++: Ein Array in C/C++ hat eine Länge.
+
+C/C++: Ein Adresse in C/C++ (auch wenn dieses auf ein Feld zeigt) hat KEINE Länge.
+
+
+
+=======================================================================
+
+C/C++ hat in der Durchgängigkeit bei der Parameterübergabe
+eine extreme Inkonsistenz:
+
+Call-by-Value:    // Kopien
+
+int n = 123;  
+func (n);         n ist eine Kopie // könnte auch in einem Register übergeben werden.
+
+int* ip = ages[0];
+func (ip);        ip ist eine Kopie 
+
+Felder werden als ADRESSE (erstes Element) übergeben.
+
+Strukturen:
+
+Strukturen werden als KOPIE übergeben.
+
+=========================================================================
+
+Referenzen:
+
+Wozu / warum wurden Referenzen in C++ ergänzt?
+
+a) Einfachere Syntax
+
+b) Es gibt keine NULL-Referenzen.
+
+c) Wann / bei welchen Variablen werden Referenzen am meisten verwendet // sie nicht verwendet:
+
+i)  Große Variablen / Objekt
+ii) Sie werden vorzugsweise verwendet
+
+    == bei Stack-Variablen
+    == bei Globalen Variablen
+
+    (( Heap: new ===> Zeiger / Pointer))  // Man kann auch eine Referenz auf ein Objekt am Heap stellen.
+    Aber wie lange ist diese Referenz dann gültig ????
+
+    
+================================================
+
+Dangling Referenz:
+
+
+================================================
+
+Copy - Elision:
+
+Copy / Move Elision:
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/CopyMoveElision/CopyMoveElision.md
+
+================================================
+
+std::println  //  Ab C++ 23 // 
+
+The return of C-printf : Thanks God :-)
+
+Wahrheit: println von C# // Python
+
+================================================
+
+Beobachtung:
+
+Performanz:
+
+Debug:    2000 // 4000 
+Release:  0 / 0
+
+================================================
+

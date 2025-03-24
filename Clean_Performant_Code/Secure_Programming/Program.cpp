@@ -7,10 +7,18 @@ extern void secure_programming_more_issues();
 extern void secure_programming_advices();
 extern void secure_programming_tools();
 
+//namespace MemoryLeaks {
+//
+//    extern void test_memory_leaks();
+//}
+
 int main()
 {
-    secure_programming_issues();          // crashes
-    //secure_programming_more_issues();
+ //   MemoryLeaks::test_memory_leaks();
+
+
+   // secure_programming_issues();          // crashes
+    secure_programming_more_issues();
     //secure_programming_advices();
     //secure_programming_tools();
     
