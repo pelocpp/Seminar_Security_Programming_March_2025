@@ -24,26 +24,36 @@ Vormittags & Nachmittags
 
 // =========================================
 
+To be Dones:
+
 Cache Line
-
 Sanitizer
-
 Type - Conversion
 
-WEITERARBEIT:
-
 STL:  Container, Algorithmen
-
 MT / Parallele Algorithmen.
 
 "no-naked for-loop"
-
 Performanz
-
 Assembler // Eleganz
 
+RAII
+Smart Pointer
+auto: Ein Beispiel
+Exception Handling
+Verwende nur Named Casts bzw. New-Style-Casts zur Typkonvertierung // C++ casts zB static_cast
+
+Ranges Bibliothek // 15 Minutes
 
 ===========================================
+
+Frage:
+
+https://stackoverflow.com/questions/60419126/why-does-vs-debug-build-allocates-variables-so-far-apart
+
+Warum liegen die Variablen soweit auseinander ????
+
+==============================================
 
 2 Tools:
 
@@ -294,3 +304,124 @@ Release:  0 / 0
 
 ================================================
 
+a + b < a
+
+b < 0
+
+a+b  versus  MAXIMUM
+
+Ziel: 
+
+a + b <= Maximum
+
+a <= Maximum - b
+
+b <= Maximum - a
+
+
+Problem: 
+
+a + b > Maximum
+
+a > Maximum - b   // Maximum - b < a
+
+b > Maximum - a   // Maximum - a < b
+
+
+// ===========================================
+
+"return"-Code Developer
+
+std::optional : 1 Kandidat
+
+std::pair<bool, std::uint32_t>
+
+bool: Hat geklappt oder nicht 
+std::uint32_t: Ergebnis, wenn es geklappt hat // 0 
+
+[[nodiscard]] std::pair<bool, std::uint32_t> berechneWas (int , int)
+{
+    return { false, 0 };
+}
+
+void main()
+{
+    auto [ hatGeklappt, ergebnis ] = berechneWas (1, 2);   //  WARNING: Ergebnis wird nicht abgeholt
+}
+
+// =====================================================================
+
+a - b >= MIN_INT
+
+
+
+Problem: 
+
+a - b < MIN_INT
+
+a < MIN_INT + b
+
+// - b < MIN_INT - a:  NOPE
+
+a < MIN_INT + b   : klar
+
+Was ist, wenn b kleiner Null ist:
+
+a - b < MIN_INT
+
+a + b1 > MAX_INT
+
+
+
+Quellcode: a > MIN_INT + b
+
+a - b < MIN_INT
+
+// =====================================================
+
+Ranges Bibliothek // Standard
+
+// =====================================================
+
+Technik Akademie Erlangen:
+
+C
+C++  // (Java) C#
+Python // JavaScript
+
+// =====================================================
+
+// C++:
+
+SomeClass anObject;    // Stack // Global
+
+// C# / Java
+
+SomeClass anObject;    // Namen // Referenz (Platz für einen Adresse)
+
+anObject = new SomeClass (...);
+
+oder
+
+SomeClass anObject = new SomeClass (...);
+// kein delete: Garbage Collector
+
+C++:
+
+SomeClass* anObject = new SomeClass (...);
+..
+delete anObject;
+
+Java:
+
+void func()
+{
+    SomeClass anObject;  // Referenz
+    ....
+}
+
+// ================================================
+
+Konstruktoren mit einem Argument:
+
+Konvertierungs-Konstruktoren

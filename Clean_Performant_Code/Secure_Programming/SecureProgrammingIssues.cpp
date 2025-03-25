@@ -17,6 +17,57 @@
 #include <stdlib.h> 
 #include <string.h>
 
+
+namespace SecureProgramming_Github_Copilot_Trial {
+
+    void test()
+    {
+        int* ip = NULL;
+        int n = 123;
+
+       // ip = n;  // das ergibt keinen Sinn!!
+    }
+
+    // append toAppend safe and secure to source
+    void string_append_safe(char* source, const char* toAppend) {
+        
+        if (source == nullptr || toAppend == nullptr) {
+            return;
+        }
+        size_t sourceLen = strlen(source);
+        size_t toAppendLen = strlen(toAppend);
+        if (sourceLen + toAppendLen + 1 > 1024) {
+            return;
+        }
+        strcat(source, toAppend);
+
+    }
+
+    // how to compare to areas of char* memory
+    static bool string_compare(char* source, char* toCompare) {
+        if (source == nullptr || toCompare == nullptr) {
+            return false;
+        }
+        return strcmp(source, toCompare) == 0;
+    }
+
+    // compute length of string without using strlen
+    static size_t string_length(char* source) {
+        if (source == nullptr) {
+            return 0;
+        }
+        size_t length = 0;
+        while (source[length] != '\0') {
+            length++;
+        }
+        return length;
+    }
+
+}
+
+
+
+
 namespace SecureProgrammingExploitability {
 
     namespace UnsignedIntegerWraparound {

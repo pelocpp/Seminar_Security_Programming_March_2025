@@ -5,6 +5,7 @@
 
 // don't use the secure versions of the CRT library functions
 #define _CRT_SECURE_NO_WARNINGS 
+
 #include <cstdlib>
 #include <cstring>
 
@@ -16,6 +17,144 @@
 #include <numeric>
 #include <print>
 #include <string>
+#include <map>
+
+// =======================================================================
+
+class SomeClass
+{
+public: 
+    void print() {}
+};
+
+static long long frage_zu_syntax() {
+
+    SomeClass p;
+    // SomeClass* p = new SomeClass();
+    p.print();
+}
+
+
+
+
+static long long frage_diff_ptr_c(int* ip1, int* ip2) {
+
+    long long result = (char*)(ip2)-(char*)(ip1);
+    return result;
+}
+
+
+void test_frage_diff_ptr_c()
+{
+    int a = 10;
+    int b = 12;
+
+    printf("Differenz: %p\n", &a);
+    printf("Differenz: %p\n", &b);
+
+    long long result = frage_diff_ptr_c(&a, &b);
+    printf("Differenz: %ld\n", result);
+}
+
+
+// auto:  
+// Einen Vorteil: Die automatic type deduction kann machmal helfen
+
+static auto frage_diff_ptr(int* ip1, int* ip2) {
+
+    auto result =  reinterpret_cast<char*>(ip2) - reinterpret_cast<char*>(ip1);
+    return result;
+}
+
+
+void test_frage_diff_ptr()
+{
+    int a = 10;
+    int b = 12;
+
+    auto result = frage_diff_ptr(&a, &b);
+    printf("Differenz: %ld\n", result);
+}
+
+
+static void test_03() {
+
+    std::map<int, std::string> anotherMap{ { 1, "Hello"  } };
+
+    std::map<int, std::string>::iterator it = anotherMap.begin();
+
+    std::pair<const int, std::string>& entry1 = *it;  // Why this line DOES NOT compile ???
+
+    auto& entry2 = *it;
+}
+
+// auto: refresher: ref versus non-ref
+
+// auto does NOT DEDUCE ref and const
+
+const std::string message{ "This is an important message :)" };
+
+static const std::string& getMessage()   // Kopie: Elision 
+{
+    return message;
+}
+
+
+
+void test_06() {
+
+    /*const*/ auto& msg1 = getMessage();
+   // msg1 += "ABC";
+    std::println("Message: {}", msg1);
+
+    // but:
+    const auto& msg2{ getMessage() };
+    std::println("Message: {}", msg2);
+
+    // Ohhh:
+    auto& msg3{ getMessage() };
+    std::println("Message: {}", msg3);
+
+    // or:
+    decltype(getMessage()) msg4{ getMessage() };
+    std::println("Message: {}", msg4);
+
+    // once again 'or':
+    decltype(auto) msg5{ getMessage() };
+    std::println("Message: {}", msg5);
+}
+
+// =======================================================================
+
+[[nodiscard]] static std::pair<bool, std::uint32_t> berechneWas(int, int)
+{
+    return { false, 0 };
+}
+
+class Point
+{
+public:
+    int m_x;
+    int m_y;
+};
+
+void testBerechneWas()
+{
+    // Structured Binding
+    auto [hatGeklappt, ergebnis] = berechneWas(1, 2);   //  WARNING: Ergebnis wird nicht abgeholt
+
+    Point p{ 1, 2 };
+
+    auto [x, y] = p;
+
+    int io_pins[4] = { 1, 2, 3, 4 };
+
+    auto& [pin1, pin2, pin3, pin4] = io_pins;
+
+    pin2 = 99;
+
+}
+
 
 namespace SecureProgrammingAdvices {
 
@@ -58,15 +197,16 @@ namespace SecureProgrammingAdvices {
 
         static void test_take_care_of_buffer_overflow_01() {
 
-            char buffer[16];
+            char buffer[8] = { 1, 1, 1, 1, 1, 1, 1, 1 };
 
             const char* str = "This is way too long for this buffer";
+            //const char* str = "123";
             std::println("Source:      >{}<", str);
 
             auto length = strlen(str);
             auto size = std::size(buffer);
 
-            // strncpy_s(buffer, size, str, length);      // crashes
+         //   strncpy(buffer, str, length);                 // crashes
             strncpy_s(buffer, size, str, size - 1);       // copy with adjusted boundary
 
             buffer[size - 1] = '\0';
@@ -182,6 +322,9 @@ namespace SecureProgrammingAdvices {
 
             std::uint32_t sum = 0;
 
+            // sum = a + b;
+            // sum - b = a
+
             if (std::numeric_limits<std::uint32_t>::max() - a < b)
             {
                 // test for UIntMax - a < b: handle error condition
@@ -227,27 +370,59 @@ namespace SecureProgrammingAdvices {
 
             int32_t result = 0;
 
-            if (b > 0 && a < std::numeric_limits<std::int32_t>::max() + b ||
-                b < 0 && a > std::numeric_limits<std::int32_t>::max() + b)
-            {
-                std::println("Cannot subtract {} from {}! !", b, a);
+            if (b > 0) {
+                if (a < std::numeric_limits<std::int32_t>::min() + b) {
+                    std::println("Cannot subtract {} from {}! !", b, a);
+                }
+                else {
+                    result = a - b;
+                    std::println("{} - {} = {}", a, b, result);
+                }
             }
-            else
+            else if (b < 0) {
+                if (a > std::numeric_limits<std::int32_t>::max() + b) {
+                    std::println("Cannot subtract {} from {}! !", b, a);
+                }
+                else {
+                    result = a - b;
+                    std::println("{} - {} = {}", a, b, result);
+                }
+            }
+            else // b == 0
             {
-                result = a - b;
+                result = a;
                 std::println("{} - {} = {}", a, b, result);
             }
+
+            //if (b > 0 && a < std::numeric_limits<std::int32_t>::min() + b ||
+            //    b < 0 && a > std::numeric_limits<std::int32_t>::max() + b)
+            //{
+            //    std::println("Cannot subtract {} from {}! !", b, a);
+            //}
+            //else
+            //{
+            //    result = a - b;
+            //    std::println("{} - {} = {}", a, b, result);
+            //}
         }
 
         static void test_arithmetic_overflow_subtraction_compliant() {
 
+            // just for better debugging
+            std::int32_t MinInt = std::numeric_limits<std::int32_t>::min();
+            std::int32_t MaxInt = std::numeric_limits<std::int32_t>::max();
+
             // for example
-            std::uint32_t a = std::numeric_limits<std::int32_t>::min() / 2;
-            std::uint32_t b = std::numeric_limits<std::int32_t>::max() / 2;
+            std::int32_t a = MinInt / 2;
+            std::int32_t b = MaxInt / 2;
 
             subtraction_compliant(a, b);
 
-            b = std::numeric_limits<std::int32_t>::max();     // removed "/ 2"
+            b = b + 1;
+
+            subtraction_compliant(a, b);
+
+            b = b + 1;
 
             subtraction_compliant(a, b);
         }
@@ -267,14 +442,15 @@ namespace SecureProgrammingAdvices {
         static int32_t multiplication_compliant(std::int32_t a, std::int32_t b) {
 
             // want to switch from 32-bit to 64-bit arithmetic
-            static_assert (sizeof (int64_t) >= 2 * sizeof(int32_t));
+   //         static_assert (sizeof (int64_t) >= 2 * sizeof(int32_t));
 
             std::int32_t result = 0;
 
             int64_t product = static_cast<int64_t>(a) * static_cast<int64_t>(b);
 
             // result needs to be represented as a 32-bit (std::int32_t) integer value (!)
-            if (product > std::numeric_limits<std::int32_t>::max() || product < std::numeric_limits<std::int32_t>::min()) {
+            if (product > std::numeric_limits<std::int32_t>::max() ||
+                product < std::numeric_limits<std::int32_t>::min()) {
 
                 std::println("Cannot multiply {} with {}! !", a, b);
             }
@@ -294,8 +470,8 @@ namespace SecureProgrammingAdvices {
 
             for (int i = 1; i < 32; ++i) {
 
-                //b = a * b;                       // remove comment
-                //std::println("{}", b);
+             //   b = a * b;                       // remove comment
+              //  std::println("{}", b);
 
                 b = multiplication_compliant(a, b);
             }
@@ -305,8 +481,8 @@ namespace SecureProgrammingAdvices {
 
         static void test_arithmetic_overflow()
         {
-            test_arithmetic_overflow_addition_compliant();
-            test_arithmetic_overflow_subtraction_compliant();
+            //test_arithmetic_overflow_addition_compliant();
+            //test_arithmetic_overflow_subtraction_compliant();
             test_arithmetic_overflow_multiplication_compliant();
         }
     }
@@ -512,17 +688,53 @@ namespace SecureProgrammingAdvices {
 
         class String {
         public:
-            /*explicit*/ String(size_t length) : m_length{ length } {};   // Bad
+            explicit String(size_t length) 
+                : m_length{ 
+                    length 
+                }, m_ch{}  {
+            };   // Bad
+
+            String(const String& s) : m_length{s.m_length}, m_ch{s.m_ch} {
+            }
+
+            bool operator== (const String& s) { return false; }
+
+            String& operator= (const String& s) { return *this; }
+
+            //String(String&& s) noexcept: m_length{ s.m_length }, m_ch{ s.m_ch } {
+            //    s.m_length = 0;
+            //    s.m_ch = '!';
+            //}
+
+            //String(char ch)
+            //    : m_ch{
+            //        ch
+            //    } {
+            //};
             // ...
 
         private:
             size_t m_length;
+            char m_ch;
             // ...
         };
 
         static void test_declare_single_argument_constructors_explicit() {
 
-            String s = '!';  // Uhhh: String of length 33
+            //  String <== char
+            
+            // Kopier-Konstruktor
+            // On initialization, the copy constructor is called
+            //String s1 = '!';                                             // Uhhh: String of length 33
+            
+            // On initialization, the copy constructor is called
+           // String s2 = (size_t)123;
+        
+            String s3 ('A');   // Konstruktor-Aufruf
+
+            if ( s3 == (String) 'A' ) {  // hier findet eine implizite Konvertierung von char nach String statt
+                // beide Objekte sind gleich
+            }
         }
     }
 
@@ -791,22 +1003,22 @@ void secure_programming_advices()
 {
     using namespace SecureProgrammingAdvices;
 
-    PreferCppToC::test_prefer_cpp_to_c();
-    TakeCareOfBufferOverflow::test_take_care_of_buffer_overflow();
-    TakeCareOfArithmeticOverflow::test_arithmetic_overflow();
-    TakeCareOfArithmeticOverflowUsingMidpoint::test_take_care_of_arithmetic_overflow();
-    PreventInjectionOfAttacks::test_injection();
-    // PreventOffbyOneErrors::test_off_by_one_errors();  // crashes
-    UseAlgorithms::test_use_algorithms();
-    SafeDowncasting::test_safe_downcasting();
-    DontUseNewExplicitely::test_dont_use_new_explicitely();
-    GivePrimitiveDatatypesSemantics::test_use_string_literals();
-    GivePrimitiveDatatypesSemantics::test_use_class_enums();
-    GivePrimitiveDatatypesSemantics::test_give_primitive_datatypes_semantics();
+    //PreferCppToC::test_prefer_cpp_to_c();
+    //TakeCareOfBufferOverflow::test_take_care_of_buffer_overflow();
+    //TakeCareOfArithmeticOverflow::test_arithmetic_overflow();
+    //TakeCareOfArithmeticOverflowUsingMidpoint::test_take_care_of_arithmetic_overflow();
+    //PreventInjectionOfAttacks::test_injection();
+    //// PreventOffbyOneErrors::test_off_by_one_errors();  // crashes
+    //UseAlgorithms::test_use_algorithms();
+    //SafeDowncasting::test_safe_downcasting();
+    // DontUseNewExplicitely::test_dont_use_new_explicitely();
+    //GivePrimitiveDatatypesSemantics::test_use_string_literals();
+    //GivePrimitiveDatatypesSemantics::test_use_class_enums();
+    //GivePrimitiveDatatypesSemantics::test_give_primitive_datatypes_semantics();
     DeclareSingleArgumentConstructorsExplicit::test_declare_single_argument_constructors_explicit();
-    UseOverride::test_use_override();
-    UseConst::test_use_const();
-    UseNodiscardAttribute::test_use_nodiscard();
+    //UseOverride::test_use_override();
+    //UseConst::test_use_const();
+    //UseNodiscardAttribute::test_use_nodiscard();
 }
 
 // ===========================================================================
