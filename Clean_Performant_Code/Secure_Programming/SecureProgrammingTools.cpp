@@ -6,6 +6,8 @@
 #include <complex>
 #include <print>
 
+#include <stdlib.h>
+
 namespace SecureProgrammingTools {
 
     static int x[100];
@@ -15,8 +17,16 @@ namespace SecureProgrammingTools {
         static void test_valid_address_with_sanitizer() {
 
             std::println("Hello!");
-            x[100] = 5; // Boom!
-            std::println("Boom!");
+            x[10] = 5; // Boom!
+            std::println("Boom 1!");
+
+            char* y = (char*)malloc(10 * sizeof(char));
+            free(y);
+
+            // ...
+
+            char ch = y[5];   // Boom!
+            std::println("Boom 2!");
         }
 
         // ---------------------
@@ -35,7 +45,7 @@ namespace SecureProgrammingTools {
         static void test_sanitizer()
         {
             test_valid_address_with_sanitizer();
-            test_infinite_loop_with_sanitizer();
+           // test_infinite_loop_with_sanitizer();
         }
     }
 
@@ -55,7 +65,7 @@ void secure_programming_tools()
     using namespace SecureProgrammingTools;
 
     UsingAddressSanitizer::test_sanitizer();
-    UsingClangTidy::test_clang_tidy();
+   // UsingClangTidy::test_clang_tidy();
 }
 
 // ===========================================================================

@@ -18,6 +18,7 @@
 #include <print>
 #include <string>
 #include <map>
+#include <vector>
 
 // =======================================================================
 
@@ -697,6 +698,14 @@ namespace SecureProgrammingAdvices {
             String(const String& s) : m_length{s.m_length}, m_ch{s.m_ch} {
             }
 
+            // Sequenz-Konstruktor
+            String(std::initializer_list<char> chars) : m_length{ 0 }, m_ch{ 0 } {
+            }
+
+            // In other words, the compiler cannot decide whether to convert the 1st or 2nd D{} argument to const B&.
+
+            // Hier darf const nicht fehlen
+
             bool operator== (const String& s) const { return false; }
 
             String& operator= (const String& s) { return *this; }
@@ -735,6 +744,17 @@ namespace SecureProgrammingAdvices {
             if ( s3 == (String) 'A' ) {  // hier findet eine implizite Konvertierung von char nach String statt
                 // beide Objekte sind gleich
             }
+
+            if (s3 == String{ 'A', 'B', 'C' }) {  // hier findet eine implizite Konvertierung von char nach String statt
+                // beide Objekte sind gleich2
+            }
+
+            String s4{ 'A' };
+            String s5{ 123 };
+            String s6(123);
+
+            std::vector<int> vec1{ 10 }; // Länge 1 - Wert 10
+            std::vector<int> vec2( 10 ); // Länge 10 - Werte alle 0 sind
         }
     }
 
@@ -838,16 +858,19 @@ namespace SecureProgrammingAdvices {
 
     namespace UseUserDefinedLiterals {
 
-        class Hours{
+        class Hours
+        {
         private:
             unsigned long long m_hours = 0;
 
         public:
-            Hours() : Hours(0) {}
-            explicit Hours (unsigned long long hours) : m_hours(hours) {}
+            constexpr Hours() : Hours(0) {}
+
+            constexpr explicit Hours (unsigned long long hours) : m_hours(hours) {}
         };
         
-        struct Days {
+        class Days
+        {
         private:
             unsigned long long m_hours = 0;
 
@@ -856,7 +879,14 @@ namespace SecureProgrammingAdvices {
             explicit Days(unsigned long long hours) : m_hours(hours) {}
         };
 
-        static Hours operator"" _hours(unsigned long long hours) {
+        // Literal Operator: Syntax-Erweiterung: _suffix eingefügt
+        // Optimale Realisierung: constexpr
+        static constexpr Hours operator"" _hours (unsigned long long hours) {
+
+            if (hours >= 24) {
+                throw std::exception("Wrong Hours");
+            }
+
             return Hours{ hours };
         }
 
@@ -866,11 +896,13 @@ namespace SecureProgrammingAdvices {
 
         static void test_use_user_defined_literals() {
 
-            auto h = 23_hours;
+            constexpr auto h1 = 23_hours;
+
+            constexpr auto h2 = 23_hours;
 
             auto d = 7_days;
 
-            // auto wrong = h + d;   // doesn't compile: Error
+        //    auto wrong = h + d;   // doesn't compile: Error
 
             // binary '+': 'Hours' does not define this operator or a conversion to a type acceptable to the predefined operator
         }
@@ -928,10 +960,17 @@ namespace SecureProgrammingAdvices {
 
         struct SuperButton : public Button {
             // ...
-            void onClick() override {
+            /*virtual*/ void onClick() final  {
                 std::println("Super Button!");
             }
         };
+
+        //struct SuperSuperButton : public SuperButton {
+        //    // ...
+        //    /*virtual*/ void onClick() final {
+        //        std::println("Super Button!");
+        //    }
+        //};
 
         static void test_use_override() {
             Button button;
@@ -963,6 +1002,8 @@ namespace SecureProgrammingAdvices {
 
             bool is_valid() const {
                 return m_x >= 0 && m_y >= 0;
+
+                // m_y = 999;
             }
         };
 
@@ -992,9 +1033,11 @@ namespace SecureProgrammingAdvices {
             }
         };
 
+        // 38,27): warning C4834: discarding return value of function with [[nodiscard]] attribute
+
         static void test_use_nodiscard() {
             Point point;
-            // point.is_valid();   // REMOVE COMMENT  // warning: ignoring return value
+            point.is_valid();   // REMOVE COMMENT  // warning: ignoring return value
         }
     }
 }
@@ -1015,10 +1058,15 @@ void secure_programming_advices()
     //GivePrimitiveDatatypesSemantics::test_use_string_literals();
     //GivePrimitiveDatatypesSemantics::test_use_class_enums();
     //GivePrimitiveDatatypesSemantics::test_give_primitive_datatypes_semantics();
-    DeclareSingleArgumentConstructorsExplicit::test_declare_single_argument_constructors_explicit();
-    //UseOverride::test_use_override();
+    //DeclareSingleArgumentConstructorsExplicit::test_declare_single_argument_constructors_explicit();
+    UseOverride::test_use_override();
     //UseConst::test_use_const();
     //UseNodiscardAttribute::test_use_nodiscard();
+
+
+    UseUserDefinedLiterals::test_use_user_defined_literals();
+    UseUserDefinedLiteralsWithConversion::test_use_user_defined_literals();
+    UseUserDefinedLiteralsWithConversion::test_use_user_defined_literals_constexpr();
 }
 
 // ===========================================================================

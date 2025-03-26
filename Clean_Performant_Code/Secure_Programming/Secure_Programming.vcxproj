@@ -44,7 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>false</EnableASAN>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DynamicIntArray\DynamicIntArray.c" />
     <ClCompile Include="SecureProgrammingIssues.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SecureProgrammingAdvices.cpp" />
@@ -139,6 +140,11 @@
   <ItemGroup>
     <None Include="cpp_security_advice_no_new.svg" />
     <None Include="cpp_security_advice_no_new_gc.svg" />
+    <None Include="DynamicIntArray\c_dynamic_int_array_01.svg" />
+    <None Include="DynamicIntArray\c_dynamic_int_array_02.svg" />
+    <None Include="DynamicIntArray\c_dynamic_int_array_03.svg" />
+    <None Include="DynamicIntArray\c_dynamic_int_array_04.svg" />
+    <None Include="DynamicIntArray\Exercises_DynamicIntArray.md" />
     <None Include="Literature.md" />
     <None Include="Readme_Secure_Programming.md" />
     <None Include="Readme_Secure_Programming_Issues.md" />
@@ -167,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Notizzettel.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DynamicIntArray\DynamicIntArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,14 +18,14 @@ extern void test_frage_diff_ptr();
 
 int main()
 {
-    test_frage_diff_ptr();
+   // test_frage_diff_ptr();
 
  //   MemoryLeaks::test_memory_leaks();
 
    // secure_programming_issues();          // crashes
     //secure_programming_more_issues();
-    secure_programming_advices();
-    //secure_programming_tools();
+    //secure_programming_advices();
+    secure_programming_tools();
     
     return 0;
 }

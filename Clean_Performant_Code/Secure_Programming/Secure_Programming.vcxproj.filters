@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DynamicIntArray">
+      <UniqueIdentifier>{08d3e37e-7008-454c-b672-54288ce4b71f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="SecureProgrammingTools.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicIntArray\DynamicIntArray.c">
+      <Filter>DynamicIntArray</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +64,21 @@
     </None>
     <None Include="Readme_Secure_Programming_MoreIssues.md">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="DynamicIntArray\c_dynamic_int_array_01.svg">
+      <Filter>DynamicIntArray</Filter>
+    </None>
+    <None Include="DynamicIntArray\c_dynamic_int_array_02.svg">
+      <Filter>DynamicIntArray</Filter>
+    </None>
+    <None Include="DynamicIntArray\c_dynamic_int_array_03.svg">
+      <Filter>DynamicIntArray</Filter>
+    </None>
+    <None Include="DynamicIntArray\c_dynamic_int_array_04.svg">
+      <Filter>DynamicIntArray</Filter>
+    </None>
+    <None Include="DynamicIntArray\Exercises_DynamicIntArray.md">
+      <Filter>DynamicIntArray</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -112,5 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Notizzettel.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DynamicIntArray\DynamicIntArray.h">
+      <Filter>DynamicIntArray</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

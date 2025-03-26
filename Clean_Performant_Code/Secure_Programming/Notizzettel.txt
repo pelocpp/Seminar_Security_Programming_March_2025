@@ -425,3 +425,76 @@ void func()
 Konstruktoren mit einem Argument:
 
 Konvertierungs-Konstruktoren
+
+
+resize:
+
+== Neue Länge
+== Destruktoren werden bei Bedarf aufgerufen (bei Verkürzung) // 99%
+== Standard-C'tor bei Verlängerung
+
+// ================================================
+
+UDL  // User Defined Literal:
+
+int h = 23_hours;   // best practice
+
+int h = 23;         //  kann man nicht verbienten
+
+int h = 25_hours;   // FEHLER
+
+======================
+
+class Employee {
+
+   int m_age;        // 18 .. 67 
+
+
+emp.setAge (18_years);   // 200_years;
+
+// ===============================
+
+
+Compiler Bau
+
+Lexikon:    Wörter der Sprache
+Grammatik
+
+C++ ist eine Sprache, deren Lexikon erweiterbar ist:  25_hours
+
+// ===============================
+
+Wozu ist const auch noch da ????
+
+Funktionale Programmierung // Gegenausprägung zur OO-Programmierung:
+
+Was ist der Bohei an der "Funktionale Programmierung": Performanz.
+
+// Pipe-Lining // Viele CPU-Befehle parallel abarbeiten:
+
+C++: OO ===> Zustands // Member-Variablen geändert werden // Inhalt eine Pipe-Line wird ungültig.
+
+// ==============================================
+
+[[ maybe_unused ]]          <=== Attribut
+[[ nodiscard ]]             <=== Attribut
+
+override                    Schlüsselwort
+
+
+GCOV  - Tool
+
+===============================================
+
+Ist es möglich, in C sichere und robuste Programme zu schreiben? Ja!
+
+Wie???
+
+Man kann auch in C objekt-orientiert programmieren ist.
+
+Anders formliert:
+
+Mit ein paar Regeln kann man durchaus sicheren und robusten C-Quellcode schreiben.
+
+Wie ???
+

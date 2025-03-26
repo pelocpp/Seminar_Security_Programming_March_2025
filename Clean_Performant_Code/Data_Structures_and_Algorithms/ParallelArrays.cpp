@@ -53,7 +53,7 @@ namespace DataStructuresAndAlgorithms {
 
             size_t sum{ 0 };
 
-            for (const auto& obj : objects) {
+            for (const auto & obj : objects) {
                 sum += obj.getScore();
             }
 
