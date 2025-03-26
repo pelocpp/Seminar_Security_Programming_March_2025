@@ -697,7 +697,7 @@ namespace SecureProgrammingAdvices {
             String(const String& s) : m_length{s.m_length}, m_ch{s.m_ch} {
             }
 
-            bool operator== (const String& s) { return false; }
+            bool operator== (const String& s) const { return false; }
 
             String& operator= (const String& s) { return *this; }
 
