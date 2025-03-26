@@ -21,6 +21,7 @@
 
 struct dynamicIntArray
 {
+// private:
     int*    m_data;
     size_t  m_length;
 };

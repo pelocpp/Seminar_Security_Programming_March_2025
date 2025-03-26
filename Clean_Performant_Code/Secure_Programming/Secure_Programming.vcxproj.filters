@@ -36,6 +36,9 @@
     <ClCompile Include="DynamicIntArray\DynamicIntArray.c">
       <Filter>DynamicIntArray</Filter>
     </ClCompile>
+    <ClCompile Include="Secure_Type_Casting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme_Secure_Programming_Issues.md">

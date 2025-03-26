@@ -492,9 +492,49 @@ Wie???
 
 Man kann auch in C objekt-orientiert programmieren ist.
 
-Anders formliert:
+Anders formuliert:
 
 Mit ein paar Regeln kann man durchaus sicheren und robusten C-Quellcode schreiben.
 
 Wie ???
+
+Man programmiere in C stilistisch "OO des armen Mannes"
+
+Anregung:
+
+Eine Struktur kann Funktionszeiger enthalten.
+
+Ausprobieren:
+
+Objektorientierte Programmierung mit ANSI C Gebundene Ausgabe – 25. Oktober 1994
+von Axel-Tobias Schreiner (Autor)
+
+// ==========================================================
+
+Wie funktioniert der virtuelle Methodenaufruf ??
+
+            base->test();
+
+Wenn eine Klasse eine (mehr.) virtuelle Methoden hat:
+
+a)  Pro Klasse wird eine Tabelle angelegt mit den Methodenadressen aller virtuellen Methoden.
+
+   Ist in der Runtime EINMAL pro Klasse vorhanden.
+
+   Name: vtable
+
+b) Jeder Objekt enthält im Instanzvariablenbereich einen Zeiger auf diese Tabelle:
+
+   vtable_ptr
+
+
+i) base->test();
+
+von base über  einen Zeiger auf diese Tabelle zur Tabelle gegangen
+
+"test" bekommt vom Compiler einen Index in diese Tabelle zugewiesen.
+
+Mit diesem Index wird die Adresse der Methode ermittelt und diese INDIREKT gerufen.
+
+
 

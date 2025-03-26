@@ -10,6 +10,7 @@ extern void secure_programming_tools();
 extern  void testBerechneWas();
 extern  void test_06();
 extern void test_frage_diff_ptr();
+extern void main_casts();
 
 //namespace MemoryLeaks {
 //
@@ -18,6 +19,7 @@ extern void test_frage_diff_ptr();
 
 int main()
 {
+    main_casts();
    // test_frage_diff_ptr();
 
  //   MemoryLeaks::test_memory_leaks();
@@ -25,7 +27,7 @@ int main()
    // secure_programming_issues();          // crashes
     //secure_programming_more_issues();
     //secure_programming_advices();
-    secure_programming_tools();
+   // secure_programming_tools();
     
     return 0;
 }

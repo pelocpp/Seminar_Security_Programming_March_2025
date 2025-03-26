@@ -44,7 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -136,6 +136,7 @@
     <ClCompile Include="SecureProgrammingAdvices.cpp" />
     <ClCompile Include="SecureProgrammingMoreIssues.cpp" />
     <ClCompile Include="SecureProgrammingTools.cpp" />
+    <ClCompile Include="Secure_Type_Casting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp_security_advice_no_new.svg" />
