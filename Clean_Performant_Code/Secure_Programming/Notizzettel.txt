@@ -4,6 +4,11 @@ Seminar Sicherheitsprogrammierung in C / C++
 
 Peter Loos
 
+peter.loos@gmx.de
+
+// =========================================
+
+
 C/C++, Java, C#,  Mobile Programming (Java),
 Kotlin, 
 
