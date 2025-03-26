@@ -82,8 +82,8 @@ namespace DataStructuresAndAlgorithms {
 
             for (size_t i{}; i != Size; ++i) {
                 for (size_t j{}; j != Size; ++j) {
-                    matrix[i][j] = value++;      // no "cache thrashing"
-                    //matrix[j][i] = value++;    // remove comment: demonstrates "cache thrashing"
+                   //  matrix[i][j] = value++;      // no "cache thrashing"
+                   matrix[j][i] = value++;    // remove comment: demonstrates "cache thrashing"
                 }
             }
         }
@@ -98,9 +98,9 @@ namespace DataStructuresAndAlgorithms {
 
 void test_caches()
 {
-    using namespace DataStructuresAndAlgorithms::CacheLinesAndCacheSizes;
-    test_examine_cache_line_size();
-    test_examine_l1_cache_size();
+    //using namespace DataStructuresAndAlgorithms::CacheLinesAndCacheSizes;
+    //test_examine_cache_line_size();
+    //test_examine_l1_cache_size();
 
     using namespace DataStructuresAndAlgorithms::CacheMisses;
     test_cache_thrashing();

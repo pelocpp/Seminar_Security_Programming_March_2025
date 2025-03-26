@@ -12,6 +12,7 @@
 #include <print>
 #include <string>
 #include <vector>
+#include <array>
 
 namespace STLAlgorithms {
 
@@ -351,9 +352,9 @@ namespace STLAlgorithms {
 namespace STLAlgorithms_BestPractices {
 
     // -----------------------------------------------------------------------
-    // non-generic vs. generic functions
+    // non-generic vs. generic functions  // std::array
 
-    static auto contains(const std::vector<int>& vec, int elem) {
+    static bool contains(const std::vector<int>& vec, int elem) {
 
         for (size_t i{}; i != vec.size(); ++i) {
             if (vec[i] == elem) {
@@ -363,8 +364,9 @@ namespace STLAlgorithms_BestPractices {
         return false;
     }
 
-    template <typename TIterator, typename TValue>
-    static auto contains(TIterator begin, TIterator end, const TValue& elem) {
+
+    template <typename T, typename V>
+    static auto contains(T begin, T end, const V& elem) {
 
         for (auto it{ begin }; it != end; ++it) {
             if (*it == elem) {
@@ -376,14 +378,20 @@ namespace STLAlgorithms_BestPractices {
 
     static void test_non_generic_vs_generic_function ()
     {
+        auto values0{ std::array{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } };  // Syntax nur durch auto möglich
+        // identisch
+        std::array values00{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
         const auto values1{ std::vector{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } };
         const auto values2{ std::list{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } };
         std::list<std::string> values3{ "1.5", "2.5", "3.5", "4.5", "5.5" };
 
         bool result1{ contains (values1, 3)};
+        //bool result1{ contains(values0, 3) };
         //bool result2{ contains(values2, 3) };
         //bool result3{ contains(values3, 3) };
 
+        bool found0{ contains(values0.begin(), values0.end(), 3) };
         bool found1{ contains(values1.begin(), values1.end(), 3) };
         bool found2{ contains(values2.begin(), values2.end(), 3) };
         bool found3{ contains(values3.begin(), values3.end(), "3.5")};
@@ -632,7 +640,7 @@ namespace STLAlgorithms_BestPractices {
     static void test_optimization_techniques()
     {
         constexpr size_t Size = 10'000'000;      // debug mode
-        // constexpr size_t Size = 500'000'000;  // release mode
+    //    constexpr size_t Size = 1000'000'000;  // release mode
         //constexpr size_t Size = 10;            // test mode
 
         std::vector <int> vec;

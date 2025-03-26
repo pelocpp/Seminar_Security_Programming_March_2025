@@ -39,6 +39,15 @@
     <ClCompile Include="Secure_Type_Casting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StringView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RAII_Clipboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Array.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme_Secure_Programming_Issues.md">

@@ -11,6 +11,7 @@ extern  void testBerechneWas();
 extern  void test_06();
 extern void test_frage_diff_ptr();
 extern void main_casts();
+extern void main_string_view();
 
 //namespace MemoryLeaks {
 //
@@ -19,7 +20,7 @@ extern void main_casts();
 
 int main()
 {
-    main_casts();
+    main_string_view();
    // test_frage_diff_ptr();
 
  //   MemoryLeaks::test_memory_leaks();

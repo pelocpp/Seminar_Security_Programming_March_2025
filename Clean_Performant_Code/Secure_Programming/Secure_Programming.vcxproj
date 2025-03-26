@@ -130,13 +130,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="DynamicIntArray\DynamicIntArray.c" />
+    <ClCompile Include="RAII_Clipboard.cpp" />
     <ClCompile Include="SecureProgrammingIssues.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SecureProgrammingAdvices.cpp" />
     <ClCompile Include="SecureProgrammingMoreIssues.cpp" />
     <ClCompile Include="SecureProgrammingTools.cpp" />
     <ClCompile Include="Secure_Type_Casting.cpp" />
+    <ClCompile Include="StringView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp_security_advice_no_new.svg" />

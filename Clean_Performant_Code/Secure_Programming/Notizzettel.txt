@@ -536,5 +536,169 @@ von base über  einen Zeiger auf diese Tabelle zur Tabelle gegangen
 
 Mit diesem Index wird die Adresse der Methode ermittelt und diese INDIREKT gerufen.
 
+==============================================================
+
+Performanz:
+
+Cache-friendly: C++
+
+Cache Misses
+
+==============================================================
+
+Benchmarking: Tools
+
+Von C nach C++:
+
+Zeichenketten
+
+Siehe auch hier:
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/StringView/StringView.md
+
+const char*
+
+std::string
+
+std::string_view
+
+Go for std::string_view
+
+const char* s = "123456789";   // Wo liegt diese im Programm ???
+
+i) NICHT HEAP
+
+ii) NICHT am STACK.
+
+iii) Möglich: Text = Code Segment
+iv) Globalen Datensegment
+
+"My favorit local Windows Debugger": Muss / soll diese Zeichenkette am HEAP liegen? Nö.
+
+Wo liegt so, wenn du std::string verwendest: Am Heap (kleiner-gleich: 15): Am Stack.
+
+std::string s { "My favorit local Windows Debugger" };
+
+            SSO // Small String Optimization
+            Ein std::string Objekt belegt 40 Bytes
+
+std::string_view s { "My favorit local Windows Debugger" };
+
+Wo liegt dieses s: 
+
+std::string s { "My favorit local Windows Debugger" };
+
+std::string_view s { "My favorit local Windows Debugger" }; 
+
+Was ist ein std::string_view: Länge + Anfangsadresse.
+
+Was ist ein Vorteil von std::string_view
+
+tail // first n chars of a string // head // substring
+
+std::string : substring, head, tail
+
+    const char* data;
+    size_t      length;
+
+Operation: Head // std::string_view-Klasse:  
+
+Neues Objekt: 
+
+    const char* data;
+    size_t      angepasse Länge;
+
+    Operation: Head // std::string_view-Klasse:  
+
+// ====
+
+Operation: Head // std::string_view-Klasse:  
+
+Neues Objekt: 
+
+    const char* data + Offet;
+    size_t      angepasste Länge;
 
 
+// ====
+
+Operation: Substring // std::string_view-Klasse:  
+
+Neues Objekt: 
+
+    const char* data + Offet;
+    size_t      angepasste Länge;
+
+
+    std::string_view ist ein NON-OWNING Container.
+
+
+// =========================================================
+
+RAII:
+
+Siehe hier:
+
+https://github.com/pelocpp/cpp_design_patterns/blob/master/Patterns/RAII_Idiom/Resources/Readme.md
+
+Was ist das ???
+
+Das ist ein Best-Practice,
+wie man am besten mit Ressourcen umgeht:
+
+a) anfordern
+b) freigeben.
+
+Socket: open, close
+FILE:  open, close
+Thread (Windows): CreateThread, ReleaseHandle.
+
+Idee:  Ähnlich Smart Pointer:
+
+===> Hüllen-Klasse
+
+Konstruktor: anfordern
+Destruktor:  freigeben
+
+// =======================================================
+
+std::array
+
+A) Length !!!
+
+B ) Parameter-Übergabe: std::span
+
+c) Range-based for-loop
+
+
+Wer ist der std::span:
+
+Wie der std::string_view:
+
+Adresse + Length für Vektoren // std::array // C-Style Array
+
+============================================================
+
+Performanz:
+
+I prefer to use auto for local variables using the left-to-right initialization style. This
+means keeping the variable on the left, followed by an equals sign, and then the type
+on the right side, like this:
+
+auto i = 0;
+auto x = Foo{};
+auto y = create_object();
+auto z = std::mutex{}; // OK since C++17
+
+With guaranteed copy elision introduced in C++17, the statement auto x = Foo{}
+is identical to Foo x{}; that is, the language guarantees that there is no temporary
+object that needs to be moved or copied in this case. This means that we can now use
+the left-to-right initialization style without worrying about performance and we can
+also use it for non-movable/non-copyable types, such as std::atomic or std::mutex.
+
+
+============================================================
+
+Warum sind STL-Algorithmen besser ???
+
+Als for-Schleifen zum Beispiel ??
