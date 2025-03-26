@@ -6,6 +6,12 @@ Peter Loos
 
 peter.loos@gmx.de
 
+https://peterloos.de/
+
+https://github.com/pelocpp
+
+https://github.com/pelocpp/cpp_clean_performant_secure_code
+
 // =========================================
 
 
